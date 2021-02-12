@@ -6,6 +6,9 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
@@ -58,5 +61,23 @@ class User extends Authenticatable
      */
     protected $appends = [
         'profile_photo_url',
+        // 'profile_photo_path',
     ];
+
+        
+    /**
+     * Return the role name of the specified person
+     *
+     * @return void
+     */
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    
+    // public function getProfilePhotoPathAttribute($value)
+    // {
+    //     return Storage::get($value);
+    // }
 }
