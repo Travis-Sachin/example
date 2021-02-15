@@ -29,17 +29,31 @@ Route::get('/', function () {
     ]);
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'user'])->name('dashboard');
 
-Route::group(['middleware' => ['auth:sanctum', 'verified', 'roles: admin'], 'prefix' => 'admin', 'name' => 'admin'], function () {
-    Route::get('/dashboard', function () {
-        $role_name = Role::find(auth()->user()->role);
-        return Inertia::render('Dashboard', ['role' => $role_name]);
-    })->name('dashboard');
+
+Route::get('/user-login', function (Request $request) {
+    dd($request->session()->all());
+})->name('user-login');
+
+Route::middleware(['auth:sanctum', 'verified', 'roles:user'])->get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'user'])->name('dashboard');
+
+Route::group(['middleware' => ['auth:sanctum', 'verified', 'roles: admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
+    Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'admin'])->name('dashboard');
 });
 
+Route::group(['middleware' => ['auth:sanctum', 'verified', 'roles: super-admin'], 'prefix' => 'super-admin', 'as' => 'super-admin.'], function () {
+    Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'superAdmin'])->name('dashboard');
 
-    Route::post('/uploader', [\App\Http\Controllers\DashboardController::class, 'uploader'])->name('uploader');
+});
+
+Route::group(['middleware' => ['roles:super-admin']], function () {
+    Route::get('/impersonate/{slug}', [\App\Http\Controllers\DashboardController::class, 'simulate'])->name('impersonate');
+});
+
+Route::get('/end-impersonation', [\App\Http\Controllers\DashboardController::class, 'endSimulation'])->name('end-impersonation');
+
+
+Route::post('/uploader', [\App\Http\Controllers\DashboardController::class, 'uploader'])->name('uploader');
 
 Route::get('/images/{slug}', function ($image) {
     return  Image::make(Storage::get('images/' . $image))->response();
