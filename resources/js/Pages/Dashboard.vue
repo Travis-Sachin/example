@@ -112,9 +112,7 @@ export default {
   },
   mounted: function () {
     // this.success="working";
-    if(this.admin!== undefined){
-      this.$page.admin= this.admin;
-    }
+    console.log(this.$page.props);
   },
   methods: {
     upload() {

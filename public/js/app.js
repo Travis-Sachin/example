@@ -4510,9 +4510,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     // this.success="working";
-    if (this.admin !== undefined) {
-      this.$page.admin = this.admin;
-    }
+    console.log(this.$page.props);
   },
   methods: {
     upload: function upload() {

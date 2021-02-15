@@ -34,8 +34,8 @@ class DashboardController extends Controller
         $data= ['role' => $this->role];
 
 
-        if(session()->has($this->admin_id))
-            $data['admin']= User::find(session()->get($this->admin_id));
+        // if(session()->has($this->admin_id))
+        //     $data['admin']= User::find(session()->get($this->admin_id));
 
         return Inertia::render('Dashboard', $data);
     }
