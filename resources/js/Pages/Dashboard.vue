@@ -6,97 +6,74 @@
       </h2> -->
     </template>
 
-    <div class="grid grid-cols-2">
-      <div>
-        <img
-          :src="route('images', user.profile_photo_path)"
-          height="50"
-          width="50"
-          alt="profile photo"
-          v-if="user.profile_photo_path"
-          class="w-full object-cover object-center shadow-md"
-        />
-        <img
-          src="https://source.unsplash.com/random/350x350"
-          alt=" random imgee"
-          v-else
-          class="w-full object-cover object-center shadow-md"
-        />
-      </div>
-      <div class="bg-red-300">
-        <div class="col-span-16 sm:col-span-4">
+    <div class="pt-6 pb-12 bg-gray-300">
+      <div id="card" class="">
+        <h2 class="text-center font-serif uppercase text-4xl xl:text-5xl">
+          My Info({{ role }})
+        </h2>
+        <!-- container for all cards -->
+        <div class="container w-100 lg:w-4/5 mx-auto flex flex-col">
+          <!-- card -->
           <div
-            class="flex w-full h-screen items-center justify-center bg-grey-lighter"
+            class="flex flex-col md:flex-row overflow-hidden bg-white rounded-lg shadow-xl mt-4 w-100 mx-2"
           >
-            <label
-              class="w-64 flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-white"
+            <!-- media -->
+            <div class="h-64 w-auto md:w-1/2">
+              <img
+                class="h-full w-full object-cover object-center"
+                :src="route('images', user.profile_photo_path)"
+                alt=""
+                v-if="user.profile_photo_path"
+              />
+              <img
+                class="inset-0 h-full w-full object-cover object-center"
+                src="https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png"
+                v-else
+              />
+            </div>
+            <!-- content -->
+            <div
+              class="w-full py-4 px-6 text-gray-800 flex flex-col justify-between"
             >
-              <svg
-                class="w-8 h-8"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
+              <h3 class="font-semibold text-lg leading-tight truncate">
+                {{ user.name }}
+              </h3>
+              <p class="mt-2">
+                {{ user.email }}
+              </p>
+              <!-- <p
+                class="text-sm text-gray-700 uppercase tracking-wide font-semibold mt-2">
+               
+              </p> -->
+              <div
+                class="flex w-full items-center justify-center bg-grey-lighter"
               >
-                <path
-                  d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"
-                />
-              </svg>
-              <span class="mt-2 text-base leading-normal">Select a file</span>
-              <input
-              id="file"
-              type="file"
-              class="mt-1 block w-full hidden"
-              ref="photo"
-              @change="upload"
-            />
-            <!-- <jet-button
-              class="mt-2 mr-2"
-              type="button"
-              @click.native.prevent="upload"
-            >
-              Upload
-            </jet-button> -->
-            </label>
+                <label
+                  class="w-64 flex flex-col items-center px-4 py-6 bg-blue-800 text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-white"
+                >
+                  <svg
+                    class="w-8 h-8"
+                    fill="white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"
+                    />
+                  </svg>
+                  <span class="mt-2 text-base leading-normal text-white"
+                    >Select a file</span
+                  >
+                  <input type="file" class="hidden" ref="photo" @change="upload"/>
+                </label>
+              </div>
+            </div>
           </div>
-          <!-- <form @submit.prevent="submit">
-            <jet-label for="file" value="Upload Image" />
-            <input
-              id="file"
-              type="file"
-              class="mt-1 block w-full"
-              ref="photo"
-            />
-            <jet-button
-              class="mt-2 mr-2"
-              type="button"
-              @click.native.prevent="upload"
-            >
-              Upload
-            </jet-button>
-          </form> -->
+          <!--/ card-->
         </div>
+        <!--/ flex-->
       </div>
     </div>
-
-    <!-- <div class="wrapper bg-blue-400 antialiased text-gray-900">
-      <img
-        :src="route('images', user.profile_photo_path)"
-        height="350"
-        width="350"
-        alt=" random imgee"
-        v-if="user.profile_photo_path"
-        class="w-full object-cover object-center rounded-lg shadow-md"
-      />
-      <img
-        src="https://source.unsplash.com/random/350x350"
-        alt=" random imgee"
-        v-else
-        class="w-full object-cover object-center rounded-lg shadow-md"
-      />
-      <div class="relative h-32 w-32 ...">
-        <div class="absolute inset-y-0 right-0 w-16">2</div>
-      </div>
-    </div> -->
 
     <div>
       <div
@@ -235,5 +212,4 @@ export default {
 };
 </script>
 <style scoped>
-
 </style>

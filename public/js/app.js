@@ -4561,29 +4561,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -33683,80 +33660,140 @@ var render = function() {
     },
     [
       _vm._v(" "),
-      _c("div", { staticClass: "grid grid-cols-2" }, [
-        _c("div", [
-          _vm.user.profile_photo_path
-            ? _c("img", {
-                staticClass: "w-full object-cover object-center shadow-md",
-                attrs: {
-                  src: _vm.route("images", _vm.user.profile_photo_path),
-                  height: "50",
-                  width: "50",
-                  alt: "profile photo"
-                }
-              })
-            : _c("img", {
-                staticClass: "w-full object-cover object-center shadow-md",
-                attrs: {
-                  src: "https://source.unsplash.com/random/350x350",
-                  alt: " random imgee"
-                }
-              })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "bg-red-300" }, [
-          _c("div", { staticClass: "col-span-16 sm:col-span-4" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "flex w-full h-screen items-center justify-center bg-grey-lighter"
-              },
-              [
-                _c(
-                  "label",
-                  {
-                    staticClass:
-                      "w-64 flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-white"
-                  },
-                  [
-                    _c(
-                      "svg",
-                      {
-                        staticClass: "w-8 h-8",
-                        attrs: {
-                          fill: "currentColor",
-                          xmlns: "http://www.w3.org/2000/svg",
-                          viewBox: "0 0 20 20"
-                        }
-                      },
-                      [
-                        _c("path", {
+      _c("div", { staticClass: "pt-6 pb-12 bg-gray-300" }, [
+        _c("div", { attrs: { id: "card" } }, [
+          _c(
+            "h2",
+            {
+              staticClass:
+                "text-center font-serif uppercase text-4xl xl:text-5xl"
+            },
+            [_vm._v("\n        My Info(" + _vm._s(_vm.role) + ")\n      ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "container w-100 lg:w-4/5 mx-auto flex flex-col" },
+            [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "flex flex-col md:flex-row overflow-hidden bg-white rounded-lg shadow-xl mt-4 w-100 mx-2"
+                },
+                [
+                  _c("div", { staticClass: "h-64 w-auto md:w-1/2" }, [
+                    _vm.user.profile_photo_path
+                      ? _c("img", {
+                          staticClass:
+                            "h-full w-full object-cover object-center",
                           attrs: {
-                            d:
-                              "M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"
+                            src: _vm.route(
+                              "images",
+                              _vm.user.profile_photo_path
+                            ),
+                            alt: ""
                           }
                         })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      { staticClass: "mt-2 text-base leading-normal" },
-                      [_vm._v("Select a file")]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      ref: "photo",
-                      staticClass: "mt-1 block w-full hidden",
-                      attrs: { id: "file", type: "file" },
-                      on: { change: _vm.upload }
-                    })
-                  ]
-                )
-              ]
-            )
-          ])
+                      : _c("img", {
+                          staticClass:
+                            "inset-0 h-full w-full object-cover object-center",
+                          attrs: {
+                            src:
+                              "https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png"
+                          }
+                        })
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "w-full py-4 px-6 text-gray-800 flex flex-col justify-between"
+                    },
+                    [
+                      _c(
+                        "h3",
+                        {
+                          staticClass:
+                            "font-semibold text-lg leading-tight truncate"
+                        },
+                        [
+                          _vm._v(
+                            "\n              " +
+                              _vm._s(_vm.user.name) +
+                              "\n            "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "mt-2" }, [
+                        _vm._v(
+                          "\n              " +
+                            _vm._s(_vm.user.email) +
+                            "\n            "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "flex w-full items-center justify-center bg-grey-lighter"
+                        },
+                        [
+                          _c(
+                            "label",
+                            {
+                              staticClass:
+                                "w-64 flex flex-col items-center px-4 py-6 bg-blue-800 text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-white"
+                            },
+                            [
+                              _c(
+                                "svg",
+                                {
+                                  staticClass: "w-8 h-8",
+                                  attrs: {
+                                    fill: "white",
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                    viewBox: "0 0 20 20"
+                                  }
+                                },
+                                [
+                                  _c("path", {
+                                    attrs: {
+                                      d:
+                                        "M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "span",
+                                {
+                                  staticClass:
+                                    "mt-2 text-base leading-normal text-white"
+                                },
+                                [_vm._v("Select a file")]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                ref: "photo",
+                                staticClass: "hidden",
+                                attrs: { type: "file" },
+                                on: { change: _vm.upload }
+                              })
+                            ]
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                ]
+              )
+            ]
+          )
         ])
       ]),
       _vm._v(" "),
