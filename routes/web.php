@@ -41,6 +41,10 @@ Route::group(['middleware' => ['auth:sanctum', 'verified', 'roles: admin'], 'pre
     Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'admin'])->name('dashboard');
 });
 
+Route::group(['middleware' => ['auth:sanctum', 'verified', 'roles: author'], 'prefix' => 'author', 'as' => 'author.'], function () {
+    Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'admin'])->name('dashboard');
+});
+
 Route::group(['middleware' => ['auth:sanctum', 'verified', 'roles: super-admin'], 'prefix' => 'super-admin', 'as' => 'super-admin.'], function () {
     Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'superAdmin'])->name('dashboard');
 

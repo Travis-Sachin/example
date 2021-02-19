@@ -11,61 +11,63 @@ use Inertia\Inertia;
 use Auth;
 use Illuminate\Support\Facades\Redirect;
 
+/**
+ * DashboardController to return dashboards of every user
+ */
 class DashboardController extends Controller
 {
     //
 
-    protected $role;
-    protected $admin_id="admin_id";
-    function __construct()
-    {
-        $this->middleware(function ($request, $next) {
-            $this->role = auth()->user()->role->name;
-            return $next($request);
-        });
-    }
+    protected $adminId = "admin_id";
+
     /**
      * Returns Dashboard of User
-     *
-     * @return void
+     * @param 
+     * @return Illuminate\Support\Facades\Response
      */
     public function user()
     {
-        $data= ['role' => $this->role];
-
-
-        // if(session()->has($this->admin_id))
-        //     $data['admin']= User::find(session()->get($this->admin_id));
-
-        return Inertia::render('Dashboard', $data);
+        $role = $this->getRole();
+        return Inertia::render('Dashboard', compact('role'));
+    }
+    /**
+     * Returns Dashboard of Author
+     * @param 
+     * @return Illuminate\Support\Facades\Response
+     */
+    public function author()
+    {
+        $role = $this->getRole();
+        return Inertia::render('Dashboard', compact('role'));
     }
     /**
      * Returns Dashboard of Admin
-     *
-     * @return void
+     * @param 
+     * @return Illuminate\Support\Facades\Response
      */
     public function admin()
     {
-        return Inertia::render('Dashboard', ['role' => $this->role]);
+        $role = $this->getRole();
+        return Inertia::render('Dashboard', compact('role'));
     }
     /**
      * Returns Dashboard of Super Admin
-     *
-     * @return void
+     * @param 
+     * @return Illuminate\Support\Facades\Response
      */
     public function superAdmin()
     {
-
+        $role = $this->getRole();
         $users = User::whereHas('role', function ($query) {
             $query->where('name', 'user');
         })->get();
-        return Inertia::render('Dashboard', ['role' => $this->role, 'users' => $users]);
+        return Inertia::render('Dashboard', compact('role', 'users'));
     }
     /**
-     * uploader
+     * To upload images
      *
-     * @param  Request $request
-     * @return void
+     * @param  \App\Http\Requests\UploadRequest $request
+     * @return \Illuminate\Support\Facades\Response
      */
     public function uploader(UploadRequest $request)
     {
@@ -76,23 +78,39 @@ class DashboardController extends Controller
         $user->save();
         return redirect()->back()->with('success', 'Image uploaded');
     }
-
+    /**
+     * To simulate login of end-user by Admin
+     *
+     * @param  mixed $slug
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Support\Facades\Response
+     */    
+    
     public function simulate($slug, Request $request)
     {
         $user = User::find($slug);
 
-        session([$this->admin_id => Auth::id()]);
-        
+        session([$this->adminId => Auth::id()]);
+
         Auth::login($user);
         return redirect()->route('dashboard');
     }
+    /**
+     * To simulate login of end-user by Admin
+     * @param  \Illuminate\Http\Request
+     * @return \Illuminate\Support\Facades\Response
+     */
     public function endSimulation(Request $request)
     {
-        if(!session()->has($this->admin_id)){
+        if (!session()->has($this->adminId)) {
             return redirect()->back()->with('error', 'No Simulation');
         }
-        $admin= User::find(session()->get($this->admin_id));
+        $admin = User::find(session()->get($this->adminId));
         Auth::login($admin);
         return redirect()->route('dashboard');
+    }
+    public function getRole()
+    {
+        return auth()->user()->role->name;
     }
 }

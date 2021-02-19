@@ -41,10 +41,6 @@
               <p class="mt-2">
                 {{ user.email }}
               </p>
-              <!-- <p
-                class="text-sm text-gray-700 uppercase tracking-wide font-semibold mt-2">
-               
-              </p> -->
               <div
                 class="flex w-full items-center justify-center bg-grey-lighter"
               >
@@ -183,7 +179,6 @@ export default {
     admin: Object,
   },
   mounted: function () {
-    // this.success="working";
   },
   methods: {
     upload() {
@@ -192,19 +187,10 @@ export default {
       data.append("photo", photo || "");
       this.$inertia.post("/uploader", data);
 
-      //   axios.post("uploader", data, {
-      //     headers: {
-      //       "Content-Type": "multipart/form-data",
-      //     },
-      //   }).then(function(res){
-      //       console.log(res.data);
-      //    });
     },
   },
   filters: {
     get_date_time: function (value, flag = false) {
-      console.log(value);
-      // return new Date(Date.parse(value.replace(/-/g, '/')));
       let date = new Date(Date.parse(value));
       return flag ? date.toDateString() : date.toTimeString();
     },
